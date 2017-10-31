@@ -5,6 +5,12 @@ Sample projects write with [kotlin](https://github.com/JetBrains/kotlin) and [la
 
 Project list:
 
+* [kotlin-retrofit](https://github.com/VerstSiu/android-samples/tree/app-retrofit)
+
+## Reference
+
+* [Kotlin and Retrofit 2: Tutorial with working codes](https://android.jlelse.eu/kotlin-and-retrofit-2-tutorial-with-working-codes-333a4422a890)
+
 ## License
 
 ```

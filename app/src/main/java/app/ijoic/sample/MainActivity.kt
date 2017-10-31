@@ -19,6 +19,12 @@ package app.ijoic.sample
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import app.ijoic.sample.retrofit.SearchCallback
+import app.ijoic.sample.retrofit.TestRetrofit
+
+import kotlinx.android.synthetic.main.activity_main.search_text
+import kotlinx.android.synthetic.main.activity_main.search_button
 
 /**
  * Main activity.
@@ -26,10 +32,30 @@ import android.os.Bundle
  * @author VerstSiu 2017/10/31 16:14
  * @version 1.0
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SearchCallback {
+
+  private val testInstance = TestRetrofit(this)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
+    search_button.setOnClickListener({ testInstance.beginSearch(search_text.text.toString()) })
+  }
+
+  override fun onPause() {
+    super.onPause()
+    testInstance.pause()
+  }
+
+  override fun onDisplayHitResult(totalHits: Int) {
+    showToast("totalHits: $totalHits")
+  }
+
+  override fun onDisplaySearchError(message: String?) {
+    showToast(message)
+  }
+
+  private fun showToast(message: String?) {
+    Toast.makeText(this, message ?: "", Toast.LENGTH_SHORT).show()
   }
 }
