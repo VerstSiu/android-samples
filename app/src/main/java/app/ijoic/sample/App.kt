@@ -17,25 +17,24 @@
  */
 package app.ijoic.sample
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import app.ijoic.sample.dagger.MainModule
+import android.app.Application
+import app.ijoic.sample.dagger.AppComponent
+import app.ijoic.sample.dagger.DaggerAppComponent
 
 /**
- * Main activity.
+ * Sample application.
  *
- * @author VerstSiu 2017/10/31 16:14
+ * @author VerstSiu 2017/10/31 16:41
  * @version 1.0
  */
-class MainActivity : AppCompatActivity() {
+class App : Application() {
 
-  val component by lazy {
-    app.component.plus(MainModule(this))
+  val component: AppComponent by lazy {
+    DaggerAppComponent.create()
   }
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
+  override fun onCreate() {
+    super.onCreate()
     component.inject(this)
   }
 }

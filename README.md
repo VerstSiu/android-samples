@@ -5,6 +5,12 @@ Sample projects write with [kotlin](https://github.com/JetBrains/kotlin) and [la
 
 Project list:
 
+* [kotlin-dagger2](https://github.com/VerstSiu/android-samples/tree/app-dagger2)
+
+## Reference
+
+* [How to use Dagger 2 on Android with Kotlin (KAD 20)](https://antonioleiva.com/dagger-android-kotlin/)
+
 ## License
 
 ```

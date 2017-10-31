@@ -15,27 +15,17 @@
  *  limitations under the License.
  *
  */
-package app.ijoic.sample
+package app.ijoic.sample.dagger
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import app.ijoic.sample.dagger.MainModule
+import app.ijoic.sample.MainActivity
+import dagger.Module
 
 /**
- * Main activity.
+ * Main module.
  *
- * @author VerstSiu 2017/10/31 16:14
+ * @author VerstSiu 2017/10/31 16:53
  * @version 1.0
  */
-class MainActivity : AppCompatActivity() {
-
-  val component by lazy {
-    app.component.plus(MainModule(this))
-  }
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
-    component.inject(this)
-  }
+@Module
+class MainModule(val activity: MainActivity) {
 }
