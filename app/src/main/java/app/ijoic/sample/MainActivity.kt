@@ -17,8 +17,13 @@
  */
 package app.ijoic.sample
 
+import android.arch.persistence.room.Room
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import app.ijoic.sample.room.User
+import app.ijoic.sample.room.UserDatabase
+
+import kotlinx.android.synthetic.main.activity_main.message_text
 
 /**
  * Main activity.
@@ -31,5 +36,23 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
+    testDatabase()
+  }
+
+  private fun testDatabase() {
+    val user = User("123", "Tom", "Lee")
+    val database = Room.inMemoryDatabaseBuilder(applicationContext, UserDatabase::class.java)
+        .allowMainThreadQueries()
+        .build()
+
+    // Given that we have a user in the data source
+    database.userDao().insertUser(user);
+
+    // When subscribing to the emissions of user
+    database.userDao()
+        .getUserById(user.uid)
+        .subscribe({ message_text.text = it.firstName })
+
+    database.close()
   }
 }
